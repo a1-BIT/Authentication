@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const { jwtSecret } = require('../config/env')
 const mongoose = require('mongoose');
 
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -22,11 +23,16 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 3,
         maxlength: 1024,
+    },
+    role: {
+        type: String,
+        required: true,
+        enum: ['Admin', 'User']
     }
 })
 
 userSchema.methods.genrateAuthToken = function () {
-    const token = jwt.sign({ _id: this._id }, jwtSecret)
+    const token = jwt.sign({ _id: this._id, role: this.role }, jwtSecret)
     return token
 }
 

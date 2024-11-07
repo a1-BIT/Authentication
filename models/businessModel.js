@@ -80,7 +80,7 @@ function validateBusiness(business) {
             state: Joi.string().allow(''),
             postalCode: Joi.string().allow(''),
             country: Joi.string().allow('')
-        }),
+        }).required(),
         hours: Joi.object({
             monday: Joi.object({ open: Joi.string().allow(''), close: Joi.string().allow('') }),
             tuesday: Joi.object({ open: Joi.string().allow(''), close: Joi.string().allow('') }),
